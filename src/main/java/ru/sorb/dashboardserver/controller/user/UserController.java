@@ -1,12 +1,12 @@
 package ru.sorb.dashboardserver.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.sorb.dashboardserver.DTO.UserDTO;
 import ru.sorb.dashboardserver.entity.UserEntity;
 import ru.sorb.dashboardserver.service.user.UserService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController("/user")
@@ -29,8 +29,13 @@ public class UserController {
         return "welcome";
     }
 
-    @GetMapping("/{userid}")
-    public UserEntity getUser(@PathVariable UUID userid){
-        return userService.getUser(userid);
+    @GetMapping("/{userId}")
+    public UserEntity getUser(@PathVariable UUID userId){
+        return userService.getUser(userId);
+    }
+
+    @PostMapping("/create")
+    public UserEntity createUser(@Valid @RequestBody UserDTO userDTO) {
+        return userService.createUser(userDTO);
     }
 }

@@ -1,9 +1,11 @@
 package ru.sorb.dashboardserver.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.sorb.dashboardserver.DTO.UserDTO;
 import ru.sorb.dashboardserver.entity.UserEntity;
 import ru.sorb.dashboardserver.exception.DashboardException;
 import ru.sorb.dashboardserver.repository.UserRepository;
+import ru.sorb.dashboardserver.util.EntityConverter;
 
 import java.util.UUID;
 
@@ -17,8 +19,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity createUser(UserEntity user) {
-        return userRepository.save(user);
+    public UserEntity createUser(UserDTO userDTO) {
+        return
+                userRepository.save(EntityConverter.convertUserDTOToUser(userDTO));
     }
 
     @Override
