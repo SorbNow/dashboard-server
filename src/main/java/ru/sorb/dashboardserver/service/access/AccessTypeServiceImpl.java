@@ -1,22 +1,22 @@
 package ru.sorb.dashboardserver.service.access;
 
-import ru.sorb.dashboardserver.entity.AccessType;
+import ru.sorb.dashboardserver.entity.AccessTypeEntity;
 
 import java.util.UUID;
 
 public class AccessTypeServiceImpl implements AccessTypeService {
     @Override
-    public AccessType createAccessType(AccessType accessType) {
+    public AccessTypeEntity createAccessType(AccessTypeEntity accessType) {
         return null;
     }
 
     @Override
-    public AccessType getAccessType(UUID uuid) {
+    public AccessTypeEntity getAccessType(UUID uuid) {
         return null;
     }
 
     @Override
-    public AccessType updateAccessType(AccessType accessType) {
+    public AccessTypeEntity updateAccessType(AccessTypeEntity accessType) {
         return null;
     }
 

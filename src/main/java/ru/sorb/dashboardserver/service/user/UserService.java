@@ -1,12 +1,15 @@
 package ru.sorb.dashboardserver.service.user;
 
 import org.springframework.stereotype.Service;
-import ru.sorb.dashboardserver.entity.User;
+import ru.sorb.dashboardserver.entity.UserEntity;
+import ru.sorb.dashboardserver.exception.DashboardException;
+
+import java.util.UUID;
 
 @Service
 public interface UserService {
-    User createUser(User user);
-    User updateUser(User user);
-    User getUser(Long id);
-    User deleteUser(Long id);
+    UserEntity createUser(UserEntity user);
+    UserEntity updateUser(UserEntity user);
+    UserEntity getUser(UUID id);
+    boolean deleteUser(UUID id) throws DashboardException;
 }

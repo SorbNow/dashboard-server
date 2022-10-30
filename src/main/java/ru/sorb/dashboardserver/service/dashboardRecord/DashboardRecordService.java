@@ -1,17 +1,17 @@
 package ru.sorb.dashboardserver.service.dashboardRecord;
 
 import org.springframework.stereotype.Service;
-import ru.sorb.dashboardserver.entity.DashboardRecord;
+import ru.sorb.dashboardserver.entity.DashboardRecordEntity;
 
 import java.util.UUID;
 
 @Service
 public interface DashboardRecordService {
-    DashboardRecord createDashboardRecord(DashboardRecord dashboardRecord);
+    DashboardRecordEntity createDashboardRecord(DashboardRecordEntity dashboardRecord);
 
-    DashboardRecord getDashboardRecord(UUID uuid);
+    DashboardRecordEntity getDashboardRecord(UUID uuid);
 
-    DashboardRecord updateDashboardRecord(DashboardRecord dashboardRecord);
+    DashboardRecordEntity updateDashboardRecord(DashboardRecordEntity dashboardRecord);
 
     boolean deleteDashboardRecord(UUID uuid);
 

@@ -1,23 +1,23 @@
 package ru.sorb.dashboardserver.service.dashboardRecord;
 
-import ru.sorb.dashboardserver.entity.DashboardRecord;
+import ru.sorb.dashboardserver.entity.DashboardRecordEntity;
 
 import java.util.UUID;
 
 
 public class DashboardRecordServiceImpl implements DashboardRecordService {
     @Override
-    public DashboardRecord createDashboardRecord(DashboardRecord dashboardRecord) {
+    public DashboardRecordEntity createDashboardRecord(DashboardRecordEntity dashboardRecord) {
         return null;
     }
 
     @Override
-    public DashboardRecord getDashboardRecord(UUID uuid) {
+    public DashboardRecordEntity getDashboardRecord(UUID uuid) {
         return null;
     }
 
     @Override
-    public DashboardRecord updateDashboardRecord(DashboardRecord dashboardRecord) {
+    public DashboardRecordEntity updateDashboardRecord(DashboardRecordEntity dashboardRecord) {
         return null;
     }
 
