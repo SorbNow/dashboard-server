@@ -10,5 +10,9 @@ public interface DashboardService {
     Dashboard createDashboard(Dashboard dashboard);
     Dashboard getDashboard(UUID uuid);
     Dashboard updateDashBoard(Dashboard dashboard);
-    Dashboard deleteDashboard(UUID uuid);
+    boolean deleteDashboard(UUID uuid);
+    boolean moveDashboard();
+    boolean addAccess(UUID userUuid, UUID accessTypeId, UUID dashboardId);
+    boolean changeAccess(UUID uuid, UUID accessTypeId, UUID dashboardId);
+    boolean removeAccess(UUID userId, UUID accessTypeId, UUID dashboardId);
 }

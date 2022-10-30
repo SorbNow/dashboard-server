@@ -4,21 +4,19 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Data
 @Table
-public class DashboardRecord {
+@Data
+public class UserAccessType {
     @Column
-    @Id
-    private UUID dashboardRecordId;
+    private UUID userId;
 
     @Column
-    private String info;
+    private UUID dashboardId;
 
     @Column
-    private Long userCreatorId;
+    private UUID accessTypeId;
 }

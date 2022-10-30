@@ -4,6 +4,7 @@ import ru.sorb.dashboardserver.entity.Dashboard;
 
 import java.util.UUID;
 
+
 public class DashboardServiceImpl implements DashboardService {
     @Override
     public Dashboard createDashboard(Dashboard dashboard) {
@@ -21,7 +22,27 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public Dashboard deleteDashboard(UUID uuid) {
-        return null;
+    public boolean deleteDashboard(UUID uuid) {
+        return false;
+    }
+
+    @Override
+    public boolean moveDashboard() {
+        return false;
+    }
+
+    @Override
+    public boolean addAccess(UUID userUuid, UUID accessTypeId, UUID dashboardId) {
+        return false;
+    }
+
+    @Override
+    public boolean changeAccess(UUID uuid, UUID accessTypeId, UUID dashboardId) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAccess(UUID userId, UUID accessTypeId, UUID dashboardId) {
+        return false;
     }
 }

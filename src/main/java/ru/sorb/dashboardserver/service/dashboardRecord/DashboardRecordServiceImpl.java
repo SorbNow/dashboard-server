@@ -22,7 +22,12 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
     }
 
     @Override
-    public DashboardRecord deleteDashboardRecord(UUID uuid) {
-        return null;
+    public boolean deleteDashboardRecord(UUID uuid) {
+        return false;
+    }
+
+    @Override
+    public boolean moveDashboardToNextStage(UUID userId, UUID dashboardRecordId) {
+        return false;
     }
 }

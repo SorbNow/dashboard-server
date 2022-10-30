@@ -13,5 +13,7 @@ public interface DashboardRecordService {
 
     DashboardRecord updateDashboardRecord(DashboardRecord dashboardRecord);
 
-    DashboardRecord deleteDashboardRecord(UUID uuid);
+    boolean deleteDashboardRecord(UUID uuid);
+
+    boolean moveDashboardToNextStage(UUID userId, UUID dashboardRecordId);
 }
