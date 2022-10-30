@@ -31,7 +31,7 @@ public class User {
     private String comment;
 
     @Column
-    @Email
+    @Email(message = "e-mail field can't be null")
     private String email;
 
 }
