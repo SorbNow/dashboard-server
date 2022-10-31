@@ -7,6 +7,7 @@ import ru.sorb.dashboardserver.exception.DashboardException;
 import ru.sorb.dashboardserver.repository.UserRepository;
 import ru.sorb.dashboardserver.util.EntityConverter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class UserServiceImpl implements UserService {
@@ -19,19 +20,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity createUser(UserDTO userDTO) {
-        return
-                userRepository.save(EntityConverter.convertUserDTOToUser(userDTO));
+    public UserEntity createUser(UserEntity userEntity) {
+        userEntity.setDateCreate(LocalDateTime.now());
+        EntityConverter.validateRest(userRepository.save(userEntity));
+        return userEntity;
     }
 
     @Override
-    public UserEntity updateUser(UserEntity user) {
-        return userRepository.save(user);
+    public UserEntity updateUser(UserEntity userEntity) throws DashboardException {
+        if (userEntity == null || userEntity.getId() == null) {
+            throw new DashboardException("Wrong user entity for creating");
+        }
+        UserEntity user= userRepository.findById(userEntity.getId()).orElse(null);
+        if (user == null) {
+            throw new DashboardException("Can't find user by id");
+        }
+        userEntity.setLastChangeDate(LocalDateTime.now());
+        userEntity = userRepository.save(userEntity);
+        EntityConverter.validateRest(userEntity);
+        return userEntity;
     }
 
     @Override
-    public UserEntity getUser(UUID id) {
-        return userRepository.findById(id).orElse(null);
+    public UserEntity getUser(UUID id) throws DashboardException {
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        if (userEntity == null) {
+            throw new DashboardException("Can't find user by id");
+        }
+        EntityConverter.validateRest(userEntity);
+        return userEntity;
     }
 
     @Override
@@ -41,7 +58,7 @@ public class UserServiceImpl implements UserService {
             user.setState(false);
             userRepository.save(user);
             return true;
-        } else throw new DashboardException("Can't find user");
+        } else throw new DashboardException("Can't find user by id");
     }
 
 }

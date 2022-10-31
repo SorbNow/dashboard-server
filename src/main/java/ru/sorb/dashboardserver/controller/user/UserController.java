@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.sorb.dashboardserver.DTO.UserDTO;
 import ru.sorb.dashboardserver.entity.UserEntity;
+import ru.sorb.dashboardserver.exception.DashboardException;
 import ru.sorb.dashboardserver.service.user.UserService;
 
 import javax.validation.Valid;
@@ -30,12 +31,12 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public UserEntity getUser(@PathVariable UUID userId){
+    public UserEntity getUser(@PathVariable UUID userId) throws DashboardException {
         return userService.getUser(userId);
     }
 
     @PostMapping("/create")
-    public UserEntity createUser(@Valid @RequestBody UserDTO userDTO) {
-        return userService.createUser(userDTO);
+    public UserEntity createUser(@Valid @RequestBody UserEntity userEntity) {
+        return userService.createUser(userEntity);
     }
 }

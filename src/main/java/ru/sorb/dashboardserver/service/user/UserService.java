@@ -9,8 +9,8 @@ import java.util.UUID;
 
 @Service
 public interface UserService {
-    UserEntity createUser(UserDTO userDTO);
-    UserEntity updateUser(UserEntity user);
-    UserEntity getUser(UUID id);
+    UserEntity createUser(UserEntity userEntity);
+    UserEntity updateUser(UserEntity user) throws DashboardException;
+    UserEntity getUser(UUID id) throws DashboardException;
     boolean deleteUser(UUID id) throws DashboardException;
 }
