@@ -1,19 +1,17 @@
 package ru.sorb.dashboardserver.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.sorb.dashboardserver.DTO.UserDTO;
 import ru.sorb.dashboardserver.entity.UserEntity;
-import ru.sorb.dashboardserver.exception.DashboardException;
 import ru.sorb.dashboardserver.util.annotations.NotShowInRest;
 
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 public class EntityConverter {
+    private static  final Logger logger  = LoggerFactory.getLogger(EntityConverter.class);
     public static UserEntity convertUserDTOToUser(UserDTO dto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         UserEntity userEntity = new UserEntity();
@@ -42,6 +40,7 @@ public class EntityConverter {
         userEntity.setEmail(dto.getEmail());
 //        return userEntity;
     }
+
     public static void validateRest(Object obj) {
         Field[] fields = obj.getClass().getDeclaredFields();
         Arrays.stream(fields).forEach(field -> {
@@ -51,7 +50,7 @@ public class EntityConverter {
                     try {
                         field.set(obj, null);
                     } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        logger.error(e.getMessage());
                     }
                 }
             }
