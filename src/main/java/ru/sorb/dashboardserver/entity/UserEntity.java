@@ -21,7 +21,10 @@ public class UserEntity {
     @Column
     private boolean state;
 
-    @Column
+    @Column(name = "is_blocked")
+    private Boolean isBlocked;
+
+    @Column(name = "username")
     @NotNull
     private String userName;
 

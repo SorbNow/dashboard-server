@@ -1,5 +1,6 @@
 package ru.sorb.dashboardserver.service.user;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.sorb.dashboardserver.DTO.UserDTO;
 import ru.sorb.dashboardserver.entity.UserEntity;
@@ -7,16 +8,24 @@ import ru.sorb.dashboardserver.exception.DashboardException;
 import ru.sorb.dashboardserver.repository.UserRepository;
 import ru.sorb.dashboardserver.util.EntityConverter;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final EntityManager entityManager;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, EntityManager entityManager) {
         this.userRepository = userRepository;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -60,5 +69,42 @@ public class UserServiceImpl implements UserService {
             return true;
         } else throw new DashboardException("Can't find user by id");
     }
+
+    @Override
+    public List<UserEntity> listUser(boolean isBlocked, boolean isDeleted, String username, boolean isLikeUsername, String email, boolean isLikeEmail, String fullName, boolean isLikeFullName, String fieldForOrder, boolean isAsc) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> q = cb.createQuery(UserEntity.class);
+        Root<UserEntity> root = q.from(UserEntity.class);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(cb.and(cb.equal(root.get("is_blocked"), isBlocked)));
+        predicates.add(cb.and(cb.equal(root.get("state"), !isDeleted)));
+        if (!StringUtils.isBlank(username))
+            predicates.add(cb.and(
+                    isLikeUsername ?
+                            cb.like(root.get("username"), username) :
+                            cb.equal(root.get("username"), username)));
+        if (!StringUtils.isBlank(email))
+            predicates.add(cb.and(
+                    isLikeEmail ?
+                            cb.like(root.get("email"), email) :
+                            cb.equal(root.get("email"), email)));
+        if (!StringUtils.isBlank(fullName))
+            predicates.add(cb.and(
+                    isLikeFullName ?
+                            cb.like(root.get("username"), fullName) :
+                            cb.equal(root.get("username"), fullName)));
+        List<Order> orderList = new ArrayList();
+        orderList.add(isAsc ? cb.asc(root.get(fieldForOrder)) : cb.desc(root.get(fieldForOrder)));
+        q.where(cb.and(predicates.toArray(new Predicate[0])));
+        if (!orderList.isEmpty()) {
+            q.orderBy(orderList);
+        }
+        q.select(root);
+
+        TypedQuery<UserEntity> typedQuery = entityManager.createQuery(q);
+        return typedQuery.getResultList();
+
+    }
+
 
 }
