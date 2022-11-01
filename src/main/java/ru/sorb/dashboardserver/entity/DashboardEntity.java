@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -27,5 +28,14 @@ public class DashboardEntity {
     @Column
     @NotNull
     private Integer stepNumber;
+
+    @Column
+    private LocalDateTime dateCreate;
+
+    @Column
+    private LocalDateTime dateUpdate;
+
+    @Column
+    private UUID creatorId;
 
 }

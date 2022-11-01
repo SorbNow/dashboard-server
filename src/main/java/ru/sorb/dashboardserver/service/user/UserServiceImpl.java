@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity createUser(UserEntity userEntity) {
+        userEntity.setId(null);
         userEntity.setDateCreate(LocalDateTime.now());
         EntityConverter.validateRest(userRepository.save(userEntity));
         return userEntity;
@@ -52,6 +53,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getUser(UUID id) throws DashboardException {
+        if (id == null) {
+            throw new DashboardException("id of user can't be null");
+        }
         UserEntity userEntity = userRepository.findById(id).orElse(null);
         if (userEntity == null) {
             throw new DashboardException("Can't find user by id");
