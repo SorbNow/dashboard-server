@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 public class UserAccessTypeEntity {
 
-    @Column
+    @Column(columnDefinition = "uuid")
     @Id
     @GeneratedValue
     private UUID uuid;

@@ -1,5 +1,6 @@
 package ru.sorb.dashboardserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import ru.sorb.dashboardserver.util.annotations.NotShowInRest;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Data
 @Table(name = "principal")
 public class UserEntity {
-    @Column
+    @Column(columnDefinition = "uuid")
     @Id
     @GeneratedValue
     private UUID id;
@@ -41,12 +42,21 @@ public class UserEntity {
     private String email;
 
     @Column
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dateCreate;
 
     @Column
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime lastChangeDate;
 
-    @Column
-    private UUID lastUserChangedId;
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private UserEntity creatorUser;
+
+    @ManyToOne
+    @JoinColumn(name = "updater_id")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private UserEntity userEntity;
 
 }

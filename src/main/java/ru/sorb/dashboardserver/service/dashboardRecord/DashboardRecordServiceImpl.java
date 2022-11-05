@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-
+@Service
 public class DashboardRecordServiceImpl implements DashboardRecordService {
 
     private final DashboardRecordRepository recordRepository;
@@ -32,7 +32,7 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
         if (dashboardRecord == null) {
             throw new DashboardException("Can't create dashboard record. Wrong income data");
         }
-        dashboardRecord.setDashboardId(null);
+        dashboardRecord.setDashboardRecordId(null);
         dashboardRecord.setDateCreate(LocalDateTime.now());
 
         return recordRepository.save(dashboardRecord);
@@ -52,10 +52,10 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
 
     @Override
     public DashboardRecordEntity updateDashboardRecord(DashboardRecordEntity dashboardRecord) throws DashboardException {
-        if (dashboardRecord == null || dashboardRecord.getDashboardId() == null) {
+        if (dashboardRecord == null || dashboardRecord.getDashboardRecordId() == null) {
             throw new DashboardException("Wrong incoming data. Can't update dashboard record");
         }
-        DashboardRecordEntity dashboardRecordEntity = recordRepository.findById(dashboardRecord.getDashboardId()).orElse(null);
+        DashboardRecordEntity dashboardRecordEntity = recordRepository.findById(dashboardRecord.getDashboardRecordId()).orElse(null);
         if (dashboardRecordEntity == null) {
             throw new DashboardException("can't find dashboard record by id");
         }
@@ -93,7 +93,7 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
         List<DashboardEntity> dashboardEntities =
                 dashboardRepository.findDashboardEntitiesByStepNumber(dashboardEntity.getStepNumber() + 1);
         if (dashboardEntities.size() == 1) {
-            dashboardRecordEntity.setDashboardId(dashboardEntities.get(0).getDashboardId());
+            dashboardRecordEntity.setDashboardEntity(dashboardEntities.get(0));
             dashboardRecordEntity.setDateUpdate(LocalDateTime.now());
             recordRepository.save(dashboardRecordEntity);
             return true;

@@ -12,7 +12,7 @@ import ru.sorb.dashboardserver.util.EntityConverter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
+@Service
 public class DashboardServiceImpl implements DashboardService {
 
     private final DashboardRepository dashboardRepository;
@@ -23,7 +23,10 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public DashboardEntity createDashboard(DashboardEntity dashboard) {
+    public DashboardEntity createDashboard(DashboardEntity dashboard) throws DashboardException {
+        if (dashboard == null) {
+            throw new DashboardException("Can't create dashboard record. Wrong income data");
+        }
         dashboard.setDashboardId(null);
         dashboard.setDateCreate(LocalDateTime.now());
         return dashboardRepository.save(dashboard);
