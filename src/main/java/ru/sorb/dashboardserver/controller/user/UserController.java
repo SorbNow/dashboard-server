@@ -10,7 +10,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
-@RestController("/user")
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
