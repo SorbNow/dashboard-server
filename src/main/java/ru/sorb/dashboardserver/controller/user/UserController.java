@@ -48,12 +48,12 @@ public class UserController {
         return userService.getUser(userId);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public UserEntity createUser(@Valid @RequestBody UserEntity userEntity) {
         return userService.createUser(userEntity);
     }
 
-    @PostMapping()
+    @PutMapping
     public UserEntity updateUser(@Valid @RequestBody UserEntity userEntity) throws DashboardException {
         return userService.updateUser(userEntity);
     }

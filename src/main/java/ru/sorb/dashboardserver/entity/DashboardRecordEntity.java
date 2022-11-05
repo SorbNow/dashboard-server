@@ -47,15 +47,15 @@ public class DashboardRecordEntity {
     @JoinColumn(name = "dashboard_id", nullable = false)
     @JsonIgnoreProperties(value = "dashboardRecords")
     @JsonBackReference
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private DashboardEntity dashboardEntity;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "creator_id", updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private UserEntity creatorUser;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "updater_user_id")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private UserEntity updaterUser;

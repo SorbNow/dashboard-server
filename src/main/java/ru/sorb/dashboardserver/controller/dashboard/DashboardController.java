@@ -1,7 +1,6 @@
 package ru.sorb.dashboardserver.controller.dashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.sorb.dashboardserver.controller.DefaultCrudControllerOperations;
 import ru.sorb.dashboardserver.entity.DashboardEntity;
@@ -36,7 +35,7 @@ public class DashboardController implements DefaultCrudControllerOperations<Dash
 
     @PutMapping
     @Override
-    public DashboardEntity updateRecord(DashboardEntity record) throws DashboardException {
+    public DashboardEntity updateRecord(@RequestBody @Valid DashboardEntity record) throws DashboardException {
         return dashboardService.updateDashBoard(record);
     }
 

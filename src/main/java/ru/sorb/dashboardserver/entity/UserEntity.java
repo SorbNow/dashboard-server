@@ -57,6 +57,6 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "updater_id")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private UserEntity userEntity;
+    private UserEntity updaterUser;
 
 }

@@ -59,7 +59,7 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
         if (dashboardRecordEntity == null) {
             throw new DashboardException("can't find dashboard record by id");
         }
-        BeanUtils.copyProperties(dashboardRecordEntity, dashboardRecord);
+        BeanUtils.copyProperties(dashboardRecord, dashboardRecordEntity);
         dashboardRecordEntity.setDateUpdate(LocalDateTime.now());
         dashboardRecordEntity = recordRepository.save(dashboardRecordEntity);
         EntityConverter.validateRest(dashboardRecordEntity);

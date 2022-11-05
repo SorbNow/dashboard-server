@@ -1,6 +1,5 @@
 package ru.sorb.dashboardserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -33,25 +32,25 @@ public class DashboardEntity {
     private Integer stepNumber;
 
     @Column
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "dateCreate", access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dateCreate;
 
     @Column
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "dateUpdate", access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dateUpdate;
 
     @OneToMany(mappedBy = "dashboardEntity")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "dashboardRecords", access = JsonProperty.Access.READ_ONLY)
     private List<DashboardRecordEntity> dashboardRecords;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "creator_id", updatable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "creatorUser" , access = JsonProperty.Access.READ_ONLY)
     private UserEntity creatorUser;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "updater_user_id")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "updaterUser", access = JsonProperty.Access.READ_ONLY)
     private UserEntity updaterUser;
 
 }
