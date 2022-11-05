@@ -43,6 +43,11 @@ public class DashboardRecordController implements DefaultCrudControllerOperation
     @DeleteMapping("/{recordId}")
     @Override
     public boolean deleteRecord(@PathVariable UUID recordId) throws DashboardException {
-        return false;
+        return dashboardRecordService.deleteDashboardRecord(recordId);
+    }
+
+    @GetMapping("/{recordId}/next")
+    public DashboardRecordEntity moveRecordToNextStep(@PathVariable UUID recordId) throws DashboardException {
+        return dashboardRecordService.moveDashboardRecordToNextStage(null, recordId);
     }
 }

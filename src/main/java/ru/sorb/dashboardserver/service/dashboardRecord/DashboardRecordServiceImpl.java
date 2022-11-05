@@ -80,7 +80,7 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
     }
 
     @Override
-    public boolean moveDashboardRecordToNextStage(UUID userId, UUID dashboardRecordId) throws DashboardException {
+    public DashboardRecordEntity moveDashboardRecordToNextStage(UUID userId, UUID dashboardRecordId) throws DashboardException {
         DashboardRecordEntity dashboardRecordEntity = recordRepository.findById(dashboardRecordId).orElse(null);
         if (dashboardRecordEntity == null) {
             throw new DashboardException("Can't find dashboard record by id");
@@ -96,7 +96,7 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
             dashboardRecordEntity.setDashboardEntity(dashboardEntities.get(0));
             dashboardRecordEntity.setDateUpdate(LocalDateTime.now());
             recordRepository.save(dashboardRecordEntity);
-            return true;
+            return dashboardRecordEntity;
         } else throw new DashboardException("Error next step finding. More than 1 dashboard can be selected");
     }
 }

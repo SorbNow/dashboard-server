@@ -16,5 +16,5 @@ public interface DashboardRecordService {
 
     boolean deleteDashboardRecord(UUID uuid) throws DashboardException;
 
-    boolean moveDashboardRecordToNextStage(UUID userId, UUID dashboardRecordId) throws DashboardException;
+    DashboardRecordEntity moveDashboardRecordToNextStage(UUID userId, UUID dashboardRecordId) throws DashboardException;
 }
