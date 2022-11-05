@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 
-@Service
 public class DashboardServiceImpl implements DashboardService {
 
     private final DashboardRepository dashboardRepository;

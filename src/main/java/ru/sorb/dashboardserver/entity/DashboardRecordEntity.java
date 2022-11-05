@@ -3,6 +3,9 @@ package ru.sorb.dashboardserver.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +23,19 @@ public class DashboardRecordEntity {
     @Column
     private String info;
 
-    @Column
+    @Column(updatable = false)
     private Long userCreatorId;
+
+    @Column(nullable = false)
+    @NotNull
+    private UUID dashboardId;
+
+    @Column(updatable = false)
+    private LocalDateTime dateCreate;
+
+    @Column
+    private LocalDateTime dateUpdate;
+
+    @Column
+    private UUID userUpdatedId;
 }
