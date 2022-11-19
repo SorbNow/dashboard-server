@@ -3,9 +3,11 @@ package ru.sorb.dashboardserver.service.dashboardRecord;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sorb.dashboardserver.entity.DashboardCardEntity;
 import ru.sorb.dashboardserver.entity.DashboardEntity;
 import ru.sorb.dashboardserver.entity.DashboardRecordEntity;
 import ru.sorb.dashboardserver.exception.DashboardException;
+import ru.sorb.dashboardserver.repository.DashboardCardRepository;
 import ru.sorb.dashboardserver.repository.DashboardRecordRepository;
 import ru.sorb.dashboardserver.repository.DashboardRepository;
 import ru.sorb.dashboardserver.util.EntityConverter;
@@ -19,12 +21,12 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
 
     private final DashboardRecordRepository recordRepository;
 
-    private final DashboardRepository dashboardRepository;
+    private final DashboardCardRepository dashboardCardRepository;
 
     @Autowired
-    public DashboardRecordServiceImpl(DashboardRecordRepository recordRepository, DashboardRepository dashboardRepository) {
+    public DashboardRecordServiceImpl(DashboardRecordRepository recordRepository, DashboardCardRepository dashboardRepository) {
         this.recordRepository = recordRepository;
-        this.dashboardRepository = dashboardRepository;
+        this.dashboardCardRepository = dashboardRepository;
     }
 
     @Override
@@ -85,15 +87,15 @@ public class DashboardRecordServiceImpl implements DashboardRecordService {
         if (dashboardRecordEntity == null) {
             throw new DashboardException("Can't find dashboard record by id");
         }
-        DashboardEntity dashboardEntity = dashboardRepository.findById(dashboardRecordEntity.getDashboardRecordId())
+        DashboardCardEntity dashboardCardEntity = dashboardCardRepository.findById(dashboardRecordEntity.getDashboardRecordId())
                 .orElse(null);
-        if (dashboardEntity == null) {
+        if (dashboardCardEntity == null) {
             throw new DashboardException("Error next step finding");
         }
-        List<DashboardEntity> dashboardEntities =
-                dashboardRepository.findDashboardEntitiesByStepNumber(dashboardEntity.getStepNumber() + 1);
+        List<DashboardCardEntity> dashboardEntities =
+                dashboardCardRepository.findDashboardCardEntitiesByStepNumber(dashboardCardEntity.getStepNumber() + 1);
         if (dashboardEntities.size() == 1) {
-            dashboardRecordEntity.setDashboardEntity(dashboardEntities.get(0));
+            dashboardRecordEntity.setDashboardCardEntity(dashboardEntities.get(0));
             dashboardRecordEntity.setDateUpdate(LocalDateTime.now());
             recordRepository.save(dashboardRecordEntity);
             return dashboardRecordEntity;

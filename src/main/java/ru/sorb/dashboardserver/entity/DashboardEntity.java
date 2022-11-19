@@ -28,10 +28,6 @@ public class DashboardEntity {
     private Long userCreatorId;
 
     @Column
-    @NotNull
-    private Integer stepNumber;
-
-    @Column
     @JsonProperty(namespace = "dateCreate", access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dateCreate;
 

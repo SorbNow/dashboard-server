@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -26,6 +27,10 @@ public class DashboardCardEntity {
 
     @Column
     private Boolean state;
+
+    @Column
+    @NotNull
+    private Integer stepNumber;
 
     @Column(updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
