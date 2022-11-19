@@ -9,8 +9,11 @@ import java.util.UUID;
 @Service
 public interface DashboardService {
     DashboardEntity createDashboard(DashboardEntity dashboard) throws DashboardException;
+
     DashboardEntity getDashboard(UUID uuid) throws DashboardException;
+
     DashboardEntity updateDashBoard(DashboardEntity dashboard) throws DashboardException;
+
     boolean deleteDashboard(UUID uuid) throws DashboardException;
     boolean moveDashboard();
     boolean addAccess(UUID userUuid, UUID accessTypeId, UUID dashboardId);

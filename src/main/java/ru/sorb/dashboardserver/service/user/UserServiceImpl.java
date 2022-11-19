@@ -3,13 +3,13 @@ package ru.sorb.dashboardserver.service.user;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sorb.dashboardserver.DTO.UserDTO;
 import ru.sorb.dashboardserver.entity.UserEntity;
 import ru.sorb.dashboardserver.exception.DashboardException;
 import ru.sorb.dashboardserver.repository.UserRepository;
 import ru.sorb.dashboardserver.util.EntityConverter;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.time.LocalDateTime;
@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, EntityManager entityManager) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.entityManager = entityManager;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         if (userEntity == null || userEntity.getId() == null) {
             throw new DashboardException("Wrong user entity for creating");
         }
-        UserEntity user= userRepository.findById(userEntity.getId()).orElse(null);
+        UserEntity user = userRepository.findById(userEntity.getId()).orElse(null);
         if (user == null) {
             throw new DashboardException("Can't find user by id");
         }

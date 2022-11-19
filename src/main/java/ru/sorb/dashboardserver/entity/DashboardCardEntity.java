@@ -7,9 +7,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +42,6 @@ public class DashboardCardEntity {
     @JoinColumn(name = "dashboard_id", nullable = false)
     @JsonIgnoreProperties(value = "dashboardCardEntities")
     @JsonBackReference
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private DashboardEntity dashboardEntity;
 
     @OneToMany(mappedBy = "dashboardCardEntity")
@@ -53,7 +50,7 @@ public class DashboardCardEntity {
 
     @ManyToOne
     @JoinColumn(name = "creator_id", updatable = false)
-    @JsonProperty(namespace = "creatorUser" , access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "creatorUser", access = JsonProperty.Access.READ_ONLY)
     private UserEntity creatorUser;
 
     @ManyToOne

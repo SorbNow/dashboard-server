@@ -1,7 +1,6 @@
 package ru.sorb.dashboardserver.controller.dashboardRecord;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.sorb.dashboardserver.controller.DefaultCrudControllerOperations;
 import ru.sorb.dashboardserver.entity.DashboardRecordEntity;

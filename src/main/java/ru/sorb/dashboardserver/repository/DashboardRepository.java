@@ -4,7 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.sorb.dashboardserver.entity.DashboardEntity;
 
-import java.util.List;
 import java.util.UUID;
 
 @Repository

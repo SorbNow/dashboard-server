@@ -11,7 +11,8 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 public class EntityConverter {
-    private static  final Logger logger  = LoggerFactory.getLogger(EntityConverter.class);
+    private static final Logger logger = LoggerFactory.getLogger(EntityConverter.class);
+
     public static UserEntity convertUserDTOToUser(UserDTO dto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         UserEntity userEntity = new UserEntity();

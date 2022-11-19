@@ -4,12 +4,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sorb.dashboardserver.entity.DashboardCardEntity;
-import ru.sorb.dashboardserver.entity.DashboardEntity;
 import ru.sorb.dashboardserver.entity.DashboardRecordEntity;
 import ru.sorb.dashboardserver.exception.DashboardException;
 import ru.sorb.dashboardserver.repository.DashboardCardRepository;
 import ru.sorb.dashboardserver.repository.DashboardRecordRepository;
-import ru.sorb.dashboardserver.repository.DashboardRepository;
 import ru.sorb.dashboardserver.util.EntityConverter;
 
 import java.time.LocalDateTime;
