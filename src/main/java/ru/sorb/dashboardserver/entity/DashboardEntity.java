@@ -40,8 +40,8 @@ public class DashboardEntity {
     private LocalDateTime dateUpdate;
 
     @OneToMany(mappedBy = "dashboardEntity")
-    @JsonProperty(namespace = "dashboardRecords", access = JsonProperty.Access.READ_ONLY)
-    private List<DashboardRecordEntity> dashboardRecords;
+    @JsonProperty(namespace = "dashboardCardEntities", access = JsonProperty.Access.READ_ONLY)
+    private List<DashboardCardEntity> dashboardCardEntities;
 
     @ManyToOne
     @JoinColumn(name = "creator_id", updatable = false)

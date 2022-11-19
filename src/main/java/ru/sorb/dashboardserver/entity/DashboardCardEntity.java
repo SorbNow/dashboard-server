@@ -6,30 +6,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
 @Table
-public class DashboardRecordEntity {
-    @Column(columnDefinition = "uuid")
+public class DashboardCardEntity {
+
     @Id
     @GeneratedValue
-    private UUID dashboardRecordId;
+    private UUID cardId;
 
     @Column
-    private boolean state;
+    private String name;
 
     @Column
-    private String info;
-/*
-    @Column(updatable = false)
-    private Long userCreatorId;*/
-
-    /*@Column(nullable = false, name = "dash")
-    @NotNull
-    private UUID dashboardId;*/
+    private Boolean state;
 
     @Column(updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -38,26 +34,25 @@ public class DashboardRecordEntity {
     @Column
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dateUpdate;
-/*
-    @Column
-    private UUID userUpdatedId;
-*/
 
     @ManyToOne
-    @JoinColumn(name = "card_id", nullable = false)
-    @JsonIgnoreProperties(value = "dashboardRecordEntities")
+    @JoinColumn(name = "dashboard_id", nullable = false)
+    @JsonIgnoreProperties(value = "dashboardCardEntities")
     @JsonBackReference
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private DashboardCardEntity dashboardCardEntity;
+    private DashboardEntity dashboardEntity;
+
+    @OneToMany(mappedBy = "dashboardCardEntity")
+    @JsonProperty(namespace = "dashboardRecordEntities", access = JsonProperty.Access.READ_ONLY)
+    private List<DashboardRecordEntity> dashboardRecordEntities;
 
     @ManyToOne
     @JoinColumn(name = "creator_id", updatable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "creatorUser" , access = JsonProperty.Access.READ_ONLY)
     private UserEntity creatorUser;
 
     @ManyToOne
     @JoinColumn(name = "updater_user_id")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(namespace = "updaterUser", access = JsonProperty.Access.READ_ONLY)
     private UserEntity updaterUser;
-
 }
