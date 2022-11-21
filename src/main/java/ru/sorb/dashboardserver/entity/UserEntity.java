@@ -59,4 +59,9 @@ public class UserEntity {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private UserEntity updaterUser;
 
+    @PrePersist
+    protected void onCreate(){
+        this.dateCreate = LocalDateTime.now();
+    }
+
 }

@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity createUser(UserEntity userEntity) {
         userEntity.setId(null);
-        userEntity.setDateCreate(LocalDateTime.now());
+
         EntityConverter.validateRest(userRepository.save(userEntity));
         return userEntity;
     }
