@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import ru.sorb.dashboardserver.listener.DashboardRecordListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -60,4 +62,10 @@ public class DashboardRecordEntity {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private UserEntity updaterUser;
 
+    @Transient
+    private List<AccessTypeEntity> userAccessType;
+
+    public List<AccessTypeEntity> getUserAccessType() {
+        return userAccessType;
+    }
 }
